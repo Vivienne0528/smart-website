@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="relative h-160 flex items-center justify-start overflow-hidden px-15">
+    <section className="top-20 relative h-160 flex items-center justify-start overflow-hidden px-15">
       <div className="absolute inset-0 flex flex-col justify-center bg-[url('/img/hero-bg.png')] bg-cover bg-center opacity-15 z-1"></div>
       <div className="relative z-10 flex flex-col  gap-30">
         <p className=" text-4xl font-extrabold">
