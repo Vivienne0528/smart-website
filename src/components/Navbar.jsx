@@ -4,8 +4,9 @@ import { IoIosArrowDown } from "react-icons/io";
 import { RiMenuFill } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { Cherry_Bomb_One } from "next/font/google";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 const cherry_bomb_one = Cherry_Bomb_One({
   weight: "400",
   subsets: ["latin"],
@@ -19,8 +20,12 @@ const cherry_bomb_one = Cherry_Bomb_One({
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [isMenuHover, setIsMenuHover] = useState(false);
   const [data, isLoading] = useFetch("/navbar.json");
+
+  const checkboxRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +34,11 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const handleClickMenu = () => {
+    setIsScrolled(() => true);
+    setIsMenuOpened(() => !isMenuOpened);
+    console.log(isMenuOpened);
+  };
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
@@ -37,14 +47,40 @@ const Navbar = () => {
     <nav
       className={`fixed w-full top-0 right-0 h-20 left-1/2 -translate-x-1/2 z-50 transition duration-300 ease-in-out
       ${
-        isScrolled
+        isScrolled && !isMenuOpened
           ? "bg-black/20 backdrop-blur-md shadow-lg border border-white/20"
           : "bg-transparent border-transparent"
       }`}
     >
-      <section className="relative px-2 sm:px-8 md:px-20 max-w-[1512px] min-w-[320px] m-auto  flex items-center justify-between h-20">
-        <section className="flex items-center gap-2 font-extrabold text-4xl">
-          <RiMenuFill className="cursor-pointer lg:hidden block" />
+      <section className="w-full relative px-2 sm:px-8 md:px-20 max-w-[1512px] min-w-[320px] m-auto  flex items-center justify-between h-20">
+        <section className="flex items-center gap-2 font-bold text-4xl">
+          <RiMenuFill
+            onMouseEnter={() => setIsMenuHover(true)}
+            onMouseLeave={() => setIsMenuHover(false)}
+            className="cursor-pointer lg:hidden block"
+          />
+          <div
+            onMouseEnter={() => setIsMenuHover(true)}
+            onMouseLeave={() => setIsMenuHover(false)}
+            className={`absolute top-14 bg-[#2E3341]  ${isMenuHover ? "block" : "hidden"} `}
+          >
+            {data.map((item) => (
+              <button key={item.id} className="flex items-center p-1">
+                <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 py-6;">
+                  {item.name}
+                </button>
+              </button>
+            ))}
+            <div className="flex flex-col items-start text-xl px-6 py-1 gap-2">
+              <button className="cursor-pointer hover:underline decoration-[#ca4520]">
+                Trending Now
+              </button>
+              <button className="cursor-pointer hover:underline decoration-[#ca4520]">
+                My List
+              </button>
+            </div>
+          </div>
+
           <Link
             href="/"
             className={`cursor-pointer text-transparent bg-clip-text bg-linear-to-r from-[#42CBA2] to-[#1C609E] ${cherry_bomb_one.className}`}
@@ -81,18 +117,9 @@ const Navbar = () => {
           <div
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className={`absolute bg-[#2E3341]  ${isHover ? "block" : "hidden"}`}
+            className={`absolute bg-[#2E3341]  ${isHover ? "block" : "hidden"} `}
           >
             {data.map((item) => (
-              // <Link
-              //   key={item.id}
-              //   href={`/${item.link}`}
-              //   className="flex items-center p-1"
-              // >
-              //   <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 py-6;">
-              //     {item.name}
-              //   </button>
-              // </Link>
               <button
                 key={item.id}
                 href={`/${item.link}`}

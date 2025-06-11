@@ -1,27 +1,37 @@
 [
   {
+    "id": 1,
+    "name": "Action",
+    "link": "/action"
+  },
+  {
     "id": 2,
-    "name": "Movies",
-    "link": "/"
+    "name": "Comedy",
+    "link": "/comedy"
   },
   {
     "id": 3,
-    "name": "TV Shows",
-    "link": "/TV Shows"
+    "name": "Romance",
+    "link": "/romance"
   },
   {
     "id": 4,
-    "name": "Reality TV",
-    "link": "/Reality TV"
+    "name": "Science",
+    "link": "/science"
   },
   {
     "id": 5,
-    "name": "Anime",
-    "link": "/Anime"
+    "name": "Thriller",
+    "link": "/thriller"
   },
   {
     "id": 6,
-    "name": "Kids",
-    "link": "/Kids"
+    "name": "Anime",
+    "link": "/anime"
+  },
+  {
+    "id": 7,
+    "name": " Variety Show",
+    "link": "/varietyShow"
   }
 ]

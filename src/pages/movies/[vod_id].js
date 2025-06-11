@@ -25,9 +25,10 @@ export default function MovieDetailPage({ data }) {
   const src = fullUrl.split("$")[1];
   console.log("播放链接：", src);
   return (
-    <section className="w-full px-2 sm:px-8 md:px-20 flex flex-col bg-[#1F2029] text-[#FBFCFF] max-w-[1512px] min-w-[320px] m-auto">
+    <section className="w-full h-screen px-2 sm:px-8 md:px-20 flex flex-col bg-[#1F2029] text-[#FBFCFF] max-w-[1512px] min-w-[320px] m-auto">
       <Navbar/>
-      <section className=" flex gap-6">
+      <section className="relative top-20"> 
+        <section className=" flex gap-6 ">
         <img
           src={movie.vod_pic}
           alt="movie poster"
@@ -75,7 +76,8 @@ export default function MovieDetailPage({ data }) {
           </video>
         )}
       </section>
-      <Footer/>
+      <Footer/></section>
+     
     </section>
   );
 }

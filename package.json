@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.20.2",
+    "@headlessui/react": "^2.2.4",
+    "@heroui/dropdown": "^2.3.21",
     "classnames": "^2.5.1",
     "daisyui": "^5.0.43",
     "next": "15.3.2",
