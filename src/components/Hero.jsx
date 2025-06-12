@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import { useRefStore } from "../hooks/useRefStore";
 const Hero = () => {
+  const { heroRef } = useContext(useRefStore);
   return (
-    <section className="relative h-160 flex items-center justify-start overflow-hidden px-15">
+    <section
+      ref={heroRef}
+      className="relative h-120 flex items-center justify-start overflow-hidden px-15"
+    >
       <div className="absolute inset-0 flex flex-col justify-center bg-[url('/img/hero-bg.png')] bg-cover bg-center opacity-15 z-1"></div>
       <div className="relative z-10 flex flex-col  gap-30">
         <p className=" text-4xl font-extrabold">

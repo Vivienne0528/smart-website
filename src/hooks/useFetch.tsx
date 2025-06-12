@@ -1,4 +1,4 @@
-//src/utils/useFetch.tsx
+//src/hooks/useFetch.tsx
 import { useState, useEffect } from "react";
 
 const useFetch = (url: string) => {

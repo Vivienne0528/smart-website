@@ -1,11 +1,15 @@
-import useFetch from "@/utils/useFetch";
+import useFetch from "../hooks/useFetch";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { RiMenuFill } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { Cherry_Bomb_One } from "next/font/google";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { UseContext } from "../pages/utils/UseContextProvider";
+import { useRefStore } from "../hooks/useRefStore";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 
 const cherry_bomb_one = Cherry_Bomb_One({
   weight: "400",
@@ -19,25 +23,22 @@ const cherry_bomb_one = Cherry_Bomb_One({
 // };
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [isMenuHover, setIsMenuHover] = useState(false);
   const [data, isLoading] = useFetch("/navbar.json");
 
-  const checkboxRef = useRef(null);
+  const {
+    isScrolled,
+    isMenuOpened,
+    setIsScrolled,
+    activeSection,
+    scrollToSection,
+  } = useContext(UseContext);
+  const { heroRef } = useContext(useRefStore);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const handleClickMenu = () => {
-    setIsScrolled(() => true);
-    setIsMenuOpened(() => !isMenuOpened);
-    console.log(isMenuOpened);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -54,36 +55,35 @@ const Navbar = () => {
     >
       <section className="w-full relative px-2 sm:px-8 md:px-20 max-w-[1512px] min-w-[320px] m-auto  flex items-center justify-between h-20">
         <section className="flex items-center gap-2 font-bold text-4xl">
-          <RiMenuFill
-            onMouseEnter={() => setIsMenuHover(true)}
-            onMouseLeave={() => setIsMenuHover(false)}
-            className="cursor-pointer lg:hidden block"
-          />
-          <div
-            onMouseEnter={() => setIsMenuHover(true)}
-            onMouseLeave={() => setIsMenuHover(false)}
-            className={`absolute top-14 bg-[#2E3341]  ${isMenuHover ? "block" : "hidden"} `}
-          >
-            {data.map((item) => (
-              <button key={item.id} className="flex items-center p-1">
-                <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 py-6;">
-                  {item.name}
+          <div className="lg:hidden block">
+            <Button onClick={toggleDrawer(true)}>
+              <RiMenuFill className="cursor-pointer" />
+            </Button>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+              {data.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/${item.name}`}
+                  className="flex items-center p-1"
+                >
+                  <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 p2-6">
+                    {item.name}
+                  </button>
+                </Link>
+              ))}
+              <div className="flex flex-col items-start text-xl px-6 py-1 gap-2">
+                <button className="cursor-pointer hover:underline decoration-[#ca4520]">
+                  Trending Now
                 </button>
-              </button>
-            ))}
-            <div className="flex flex-col items-start text-xl px-6 py-1 gap-2">
-              <button className="cursor-pointer hover:underline decoration-[#ca4520]">
-                Trending Now
-              </button>
-              <button className="cursor-pointer hover:underline decoration-[#ca4520]">
-                My List
-              </button>
-            </div>
+                <button className="cursor-pointer hover:underline decoration-[#ca4520]">
+                  My List
+                </button>
+              </div>
+            </Drawer>
           </div>
-
           <Link
             href="/"
-            className={`cursor-pointer text-transparent bg-clip-text bg-linear-to-r from-[#42CBA2] to-[#1C609E] ${cherry_bomb_one.className}`}
+            className={`cursor-pointer hover:scale-105 transition duration-200 ease-in-out text-transparent bg-clip-text bg-linear-to-r from-[#42CBA2] to-[#1C609E] ${cherry_bomb_one.className}`}
           >
             SMART
           </Link>
@@ -120,7 +120,7 @@ const Navbar = () => {
             className={`absolute bg-[#2E3341]  ${isHover ? "block" : "hidden"} `}
           >
             {data.map((item) => (
-              <button
+              <Link
                 key={item.id}
                 href={`/${item.link}`}
                 className="flex items-center p-1"
@@ -128,7 +128,7 @@ const Navbar = () => {
                 <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 py-6;">
                   {item.name}
                 </button>
-              </button>
+              </Link>
             ))}
           </div>
         </section>

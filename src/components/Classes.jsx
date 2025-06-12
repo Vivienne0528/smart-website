@@ -21,7 +21,7 @@ const Classes = ({
     { index: 24, clsData: varietyShowData },
   ];
   return (
-    <section className="flex flex-col gap-4 ">
+    <section className="flex flex-col gap-4 bg-gradient-to-br from-[#2E3341] from-0% via-[#40475B] via-75% to-[#7683A7] to-100%  ">
       {classIndexes.map((item) => (
         <ClassSection
           key={item.index}

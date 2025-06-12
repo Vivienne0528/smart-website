@@ -2,36 +2,36 @@
   {
     "id": 1,
     "name": "Action",
-    "link": "/action"
+    "link": "/Action"
   },
   {
     "id": 2,
     "name": "Comedy",
-    "link": "/comedy"
+    "link": "/Comedy"
   },
   {
     "id": 3,
     "name": "Romance",
-    "link": "/romance"
+    "link": "/Romance"
   },
   {
     "id": 4,
     "name": "Science",
-    "link": "/science"
+    "link": "/Science"
   },
   {
     "id": 5,
     "name": "Thriller",
-    "link": "/thriller"
+    "link": "/Thriller"
   },
   {
     "id": 6,
     "name": "Anime",
-    "link": "/anime"
+    "link": "/Anime"
   },
   {
     "id": 7,
     "name": " Variety Show",
-    "link": "/varietyShow"
+    "link": "/VarietyShow"
   }
 ]

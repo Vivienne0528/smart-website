@@ -4,7 +4,7 @@ import Link from "next/link";
 const ClassSection = ({ data, index, clsData }) => {
   return (
     <section>
-      <h2 className="text-xl font-semibold">
+      <h2 className="text-2xl font-semibold py-1">
         {data.class?.[index]?.type_name}
       </h2>
       <div className="carousel rounded-box gap-4">
