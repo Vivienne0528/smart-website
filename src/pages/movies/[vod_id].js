@@ -76,7 +76,8 @@ export default function MovieDetailPage({ data }) {
           </video>
         )}
       </section>
-      <Footer/></section>
+      <Footer/>
+      </section>
      
     </section>
   );

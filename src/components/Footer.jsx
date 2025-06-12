@@ -41,7 +41,7 @@ const Footer = () => {
             {data.map((item) => (
               <Link
                 key={item.id}
-                href={`/${item.name}`}
+                href={`/${item.name}/1`}
                 className="flex items-center p-1"
               >
                 <button className="cursor-pointer hover:underline decoration-[#ca4520] py-3;">
