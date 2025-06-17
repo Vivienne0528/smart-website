@@ -4,6 +4,7 @@ import Link from "next/link";
 const ClassSection = ({ data, index, clsData }) => {
   return (
     <section>
+      {/* <Link href={`/${item.name}/1`}></Link> */}
       <h2 className="text-2xl font-semibold py-1">
         {data.class?.[index]?.type_name}
       </h2>
@@ -17,7 +18,7 @@ const ClassSection = ({ data, index, clsData }) => {
             <img
               src={item.vod_pic}
               alt={item.vod_name}
-              className="w-[200px] h-[280px] object-cover rounded-lg"
+              className="w-[200px] h-[280px] object-cover rounded-lg transform hover:scale-105 transition duration-300"
             />
           </Link>
         ))}

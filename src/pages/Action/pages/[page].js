@@ -1,8 +1,8 @@
 //src/pages/movies/[vod_id].js
 import Navbar from "@/components/Navbar";
+import Pagination from "@/components/Pagination";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-
 export async function getServerSideProps(context) {
   const res = await fetch(
     `https://api.wujinapi.me/api.php/provide/vod/?ac=detail&pg=${context.params.page}&t=6`,
@@ -24,23 +24,26 @@ export default function Action({ data}) {
         <Navbar />
         <section className="flex flex-col gap-4">
              <h2 className="text-xl font-semibold"> 动作片</h2>
-             <div className="flex flex-wrap gap-4">
+             <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]">
                  {data.list?.map((item) => (
                      <Link
                          key={item.vod_id}
                          href={{
-                         pathname: `/movies/${item.vod_id}`,
+                         pathname: `/movies/${item.vod_id}`
+                      
                  }}
              >
                         <img
                             src={item.vod_pic}
                             alt={item.vod_name}
-                            className="w-[200px] h-[280px] object-cover rounded-lg"
+                            className="w-[200px] h-[280px] object-cover rounded-lg transform hover:scale-105 transition duration-300"
+                            
                         />
                     </Link>
                 ))}
              </div>
-
+             <Pagination cls={"Action"}/>
+            
             </section>
 
         <Footer />

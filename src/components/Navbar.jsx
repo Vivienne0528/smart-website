@@ -63,7 +63,7 @@ const Navbar = () => {
               {data.map((item) => (
                 <Link
                   key={item.id}
-                  href={`/${item.name}/1`}
+                  href={`/${item.name}/pages/1`}
                   className="flex items-center p-1"
                 >
                   <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 p2-6">
@@ -122,7 +122,7 @@ const Navbar = () => {
             {data.map((item) => (
               <Link
                 key={item.id}
-                href={`/${item.link}/1`}
+                href={`/${item.link}/pages/1`}
                 className="flex items-center p-1"
               >
                 <button className="cursor-pointer hover:underline decoration-[#ca4520] text-xl px-5 py-6;">
@@ -134,13 +134,13 @@ const Navbar = () => {
         </section>
 
         <section className="flex gap-2">
-          <div className="flex items-center border-1 px-3 py-1 rounded-full h-8 font-extralight bg-[#2E3341]">
+          <div className="flex items-center border-1 px-3 py-1 rounded-full h-8 font-extralight bg-[#2E3341] ">
             <input
               type="text"
               name="search"
               id="search"
               placeholder="Search..."
-              className="outline-0"
+              className="outline-0 w-20"
             />
             <IoSearch />
           </div>
